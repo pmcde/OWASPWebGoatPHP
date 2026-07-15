@@ -165,7 +165,9 @@ abstract class BaseRBAC extends Model
 	 */
 	function AddPath($Path, array $Descriptions = null)
 	{
-		assert ( $Path [0] == "/" );
+		if ($Path[0] !== "/") {
+			throw new \Exception("Path must start with /");
+		}
 		
 		$Path = substr ( $Path, 1 );
 		$Parts = explode ( "/", $Path );
