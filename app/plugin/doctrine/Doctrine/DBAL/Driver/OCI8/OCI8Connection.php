@@ -123,6 +123,10 @@ class OCI8Connection implements \Doctrine\DBAL\Driver\Connection
         }
 
         OraclePlatform::assertValidIdentifier($name);
+        
+        if (preg_match('/[^a-zA-Z0-9_$#]/', $name)) {
+            throw new OCI8Exception("Invalid sequence name: only alphanumeric characters, underscores, dollar signs, and hash symbols are allowed.");
+        }
 
         $sql    = 'SELECT ' . $name . '.CURRVAL FROM DUAL';
         $stmt   = $this->query($sql);
