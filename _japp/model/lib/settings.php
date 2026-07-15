@@ -94,7 +94,7 @@ class SettingManager extends Model
 		if($Res===null)
 			return null;
 		else
-			return unserialize($Res[0]['Value']);
+			return unserialize($Res[0]['Value'], ['allowed_classes' => false]);
 	}
 	/**
 	 * Save general settings for application
